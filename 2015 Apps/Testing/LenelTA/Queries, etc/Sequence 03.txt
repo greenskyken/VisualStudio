@@ -1,0 +1,57 @@
+Time and Attendance - Data Sequence
+
+One cardholder, one area, date range
+
+Pull records for that door
+	- select from door - where deviceid = <in door. or <out door>
+	- order by date and time
+
+Make sure the first record in an "IN" door
+	- If not, delete record...index 0 from dataset
+
+Make sure that the last record is an "OUT" door
+	- If not, delete record....index last from dataset
+	
+Error checking:
+- for x=0, x+2, x=rowcount-1
+	- row (x).deviceID = in reader
+	- row (x+1).deviceID = out reader
+	- next
+	
+if this returns OK
+
+Add colums to Dataset.table
+- Move timeout to new column
+
+Create new dataset - and tabel
+- Add all existing columns
+	- also add a column for out time
+	- also add a column for elapsed
+
+Copy records to new table
+- will remove spaces
+
+Calculate time difference to the nearest minute
+- cast times to time
+- subtract in from out
+- dump this in the elapsed time column
+
+Dump data to a DataGridView wiht the column headers
+- total all elapsed time in the table and add a line to the bottom of the table.....Column 4 Total...column 5 is the number
+
+Save to csv mechanism
+
+Multiple cardholders, or multiple areas
+- create two arrays
+	- all cardholders in one
+	- All areas in the other
+	
+- Cycle through each, adding them to the DataGridView
+- Cardholder (0), Area (0)
+- Cardholder (0), Area (1)
+etc
+then
+Cardholder (1), area (0)
+
+
+

@@ -1,0 +1,65 @@
+Form Buttons
+- Load Records
+- Close
+- Start Over
+	- Start over clears all fields
+	- All boxes disabled
+
+Load all reader names into Area table
+	- IndexID
+	- Location (Snap, Victor, Gahcho)
+	- Area
+	- DoorName
+	- ReaderIn
+	- ReaderInTable
+	- ReaderOut
+	- ReaderOutTable
+	
+Application Load
+- All buttons and boxes disabled
+
+- User presses Load button
+	- Get locations, and areas from 200_Area table
+	- locations is enabled
+	
+- User selects location
+	- Area is loaded with areas for the selected location
+	- Calendar enabled
+	
+- User select calendar entry
+	- Area enabled
+	
+- User selects an area
+	- Query generated to get badge records
+	- "select  from tables where location = <location alias> and area = <In door or out door> during these days"
+	- Pull first, last and badge
+	- Concatenate the name and badge and load into badge
+		- "LastName, FirsName - Badge#"
+		
+For all in any category.....repeat for all
+
+We now have the location, area, calendar framing and the badge
+
+Create the query to pull only those records
+- Sort by Date and Time
+- Then look for multiples
+	- cycle through each row, and compare the previous row DEVICE_ID to the current
+		- If they are the same, delete the first entry
+	- repeat for the remaining data
+		- You want in, then out, then, in...etc
+	
+Confirm first entry is an IN reader
+- Compare the area selected IN reader name to the first row
+
+Confirm that the last is an OUT....same procedures
+
+For X = 1 to rowcount
+- Copy Date In, Time In, Date Out, Time Out, Area, Badge, Last First, Total Hours
+	- If dates are the same, subtract 1 from 2
+	- If out date is higher than in date, calculate in date till midnight, and midnight to out date
+
+- Bottom of the page should tally that location, area, calendar range, and badge hours 
+
+
+		
+

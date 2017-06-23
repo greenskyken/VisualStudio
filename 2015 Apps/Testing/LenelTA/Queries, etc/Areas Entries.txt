@@ -1,0 +1,46 @@
+use LenelTA
+
+delete from [dbo].[200_area]
+
+insert into
+	[200_Area] ( IndexID, Location, Area, DoorName, InReader, OutReader )
+values
+	(1000,'SLM','Recovery','','SLM-PCC - Red Entry BIO (013)','SLM-PCC - Red Exit Vestibule (011)')
+	,(1001,'SLM','Recovery Tower','','SLM-RED - Recovery IN BIO (101)','SLM-RED - Recovery OUT (101)')
+	,(1002,'SLM','Recovery Tower 2nd Flr','','SLM-RED - Recovery Plant 2F IN BIO','SLM-RED - Recovery Plant 2F OUT')
+	,(1003,'SLM','Recovery Tower 3rd Flr','','SLM-RED - Recovery Plant 3F IN BIO','SLM-RED - Recovery Plant 3F OUT')
+	,(1004,'SLM','Recovery Tower 4th Flr','','SLM-RED - Recovery Plant 4F IN BIO','SLM-RED - Recovery Plant 4F OUT')
+	,(1005,'SLM','Recovery Tower 5th Flr','','SLM-RED - Recovery Plant 5F IN BIO','SLM-RED - Recovery Plant 5F OUT')
+	,(1006,'SLM','Recovery Tower 6th Flr','','SLM-RED - Recovery Plant 6F IN BIO','SLM-RED - Recovery Plant 6F OUT')
+	,(1007,'SLM','Recovery Tower 7th Flr','','SLM-RED - Recovery Plant 7F IN BIO','SLM-RED - Recovery Plant 7F OUT')
+	,(1008,'SLM','Recovery Tower 8th Flr','','SLM-RED - Recovery Plant 8F IN BIO','SLM-RED - Recovery Plant 8F OUT')
+	,(1009,'SLM','Export Room','','SLM-RED - Export Safe Room IN BIO (034)','SLM-RED - Export Safe Room OUT (034)')
+	,(1010,'SLM','Vault Vesitbule','','SLM-RED - Vault Vestibule IN BIO (150)','SLM-RED - Vault Vestibule OUT BIO (150)')
+	,(1011,'SLM','Vault Day Gate','','SLM-RED - Vault Day Gate IN BIO (151)','SLM-RED - Vault Day Gate OUT BIO (151)')
+	,(2000,'VIC','Recovery','','VIC-PCC-ENTRY-Red Entry Door Reader','VIC-PCC-EXIT-Red Exit Reader')
+	,(2001,'VIC','Recovery Tower','','VIC-RED-RECOV-1F Recovery Tower Booth Entrance BIO','VIC-RED-RECOV-1F Recovery Tower Booth Exit Reader')
+	,(2002,'VIC','Recovery Tower 2nd Flr','','VIC-RED-RECOV-2F Entry BIO','VIC-RED-RECOV-2F Exit Reader')
+	,(2003,'VIC','Recovery Tower 3rd Flr','','VIC-RED-RECOV-3F Entry BIO','VIC-RED-RECOV-3F Exit Reader')
+	,(2004,'VIC','Recovery Tower 4th Flr','','VIC-RED-RECOV-4F Entry BIO','VIC-RED-RECOV-4F Exit Reader')
+	,(2005,'VIC','Recovery Tower 5th Flr','','VIC-RED-RECOV-5F Entry BIO','VIC-RED-RECOV-5F Exit Reader')
+	,(2006,'VIC','Recovery Tower 6th Flr','','VIC-RED-RECOV-6F Entry BIO','VIC-RED-RECOV-6F Exit Reader')
+	,(2007,'VIC','Recovery Sink Screen','','VIC-RED-RECOV-6F Screen to Tower Reader BIO','VIC-RED-RECOV-6F Tower to Screen Reader')	
+	,(2008,'VIC','Vault Gate','','VIC-RED-Vault Gate Entrance Reader','VIC-RED-Vault Gate Exit Reader')
+	,(2009,'VIC','Cleaning Room','','VIC-RED-Cleaning Room Entry Reader','VIC-RED-Cleaning Room Exit Reader')	
+	,(2010,'VIC','Export Room','','SLM-RED - Export Safe Room IN BIO (034)','SLM-RED - Export Safe Room OUT (034)')
+	,(2011,'VIC','Valuation Room','','VIC-PCC-Valuation Room Booth Entry Reader','VIC-PCC-Valuation Room Booth Exit Reader')	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+

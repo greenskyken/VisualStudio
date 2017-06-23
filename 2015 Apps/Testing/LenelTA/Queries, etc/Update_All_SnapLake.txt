@@ -1,0 +1,53 @@
+use DBCAMASTERAC
+
+declare @Date_Event datetime = dateadd(month,-1,getdate())
+
+delete from [LenelTA].[dbo].[301_All_Critical_Records_SnapLake]
+
+insert into [LenelTA].[dbo].[301_All_Critical_Records_SnapLake]
+
+select
+	cast(EVENTS.EVENT_TIME_UTC as DATE) as Access_Date_UTC,
+	convert(varchar(10),EVENTS.EVENT_TIME_UTC,108) as Access_Time_UTC,
+	READER.READERDESC as Device_ID,
+	EVENTYPE.EVTDESCR as Event_Type,
+	EMP.FIRSTNAME as First_Name,
+	EMP.LASTNAME as Last_Name,
+	EVENTS.CARDNUM as Badge
+from
+	EVENTS
+		join EVENTYPE on EVENTS.EVENTTYPE = EVENTYPE.EVTYPEID
+		join BADGE on EVENTS.CARDNUM = BADGE.ID
+		join EMP on BADGE.EMPID = EMP.ID
+		join READER on EVENTS.DEVID = READER.READERID
+		and EVENTS.MACHINE = READER.PANELID 
+where
+	EVENT_TIME_UTC >= @Date_Event and
+	EVENTTYPE = 0 and
+	Reader.READERDESC in
+	(
+	'SLM-PCC - Red Entry BIO (013)',
+	'SLM-RED - Recovery IN BIO (101)',
+	'SLM-RED - Recovery Plant 2F IN BIO',
+	'SLM-RED - Recovery Plant 2F OUT',
+	'SLM-RED - Recovery Plant 3F IN BIO',
+	'SLM-RED - Recovery Plant 3F OUT',
+	'SLM-RED - Recovery Plant 4F IN BIO',
+	'SLM-RED - Recovery Plant 4F OUT',
+	'SLM-RED - Recovery Plant 5F IN BIO',
+	'SLM-RED - Recovery Plant 5F OUT',
+	'SLM-RED - Recovery Plant 6F IN BIO',
+	'SLM-RED - Recovery Plant 6F OUT',
+	'SLM-RED - Recovery Plant 7F IN BIO',
+	'SLM-RED - Recovery Plant 7F OUT',
+	'SLM-RED - Recovery Plant 8F IN BIO',
+	'SLM-RED - Recovery Plant 8F OUT',
+	'SLM-RED - Recovery OUT (101)',
+	'SLM-RED - Export Safe Room IN BIO (034)',
+	'SLM-RED - Export Safe Room OUT (034)',
+	'SLM-RED - Vault Vestibule IN BIO (150)',
+	'SLM-RED - Vault Day Gate IN BIO (151)',
+	'SLM-RED - Vault Day Gate OUT BIO (151)',
+	'SLM-RED - Vault Vestibule OUT BIO (150)',
+	'SLM-PCC - Red Exit Vestibule (011)')
+order by Access_Date_UTC, Access_Time_UTC

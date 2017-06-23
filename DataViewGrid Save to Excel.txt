@@ -1,0 +1,144 @@
+The Sample demonstrates how to export data from DataGridView control to excel. 
+
+Introduction
+
+The Sample demonstrates how to export data from DataGridView control to excel.
+
+--Building the Sample
+
+The main of the sample is to export data from DataGridView control to excel.
+We use Microsoft.Office.Interop.Excel to achieve this.
+When user clicks on Export to Excel button, we read the data from DataGridView and save it to a new Excel file.
+We get user input to specify the location and file name while saving it.
+Running the Sample.
+
+Open “CSExportDGViewToExcel.sln” file in Visual Studio 2012.
+Rebuild the sample. If the version of Office reference is not available, please refer appropriate office dll version.
+Run the sample.
+Click on “Export To Excel” button.
+A SaveFileDailog window will pop up. Select a location and specify the name for the file.
+On successful save, we get a message.
+Using the Code
+
+The following code is added on form load to add dummy data for test.
+
+C#
+/// <summary> 
+/// Add dummy rows to the datagridview. 
+/// </summary>
+private void PopulateRows() 
+       { 
+           for (int i = 1; i <= 10; i++) 
+           { 
+               DataGridViewRow row = 
+                   (DataGridViewRow)dgvCityDetails.RowTemplate.Clone(); 
+  
+               row.CreateCells(dgvCityDetails, string.Format("City{0}", i), 
+                   string.Format("State{0}", i), string.Format("Country{0}", i)); 
+  
+               dgvCityDetails.Rows.Add(row); 
+  
+           } 
+       }
+
+
+
+
+ 
+
+
+The following code exports the data from DatagridView to Excel.
+
+C#
+/// <summary> 
+/// Exports the datagridview values to Excel. 
+/// </summary> 
+        private void ExportToExcel() 
+        { 
+            // Creating a Excel object. 
+            Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application(); 
+            Microsoft.Office.Interop.Excel._Workbook workbook = excel.Workbooks.Add(Type.Missing); 
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null; 
+  
+            try 
+            { 
+                 
+                worksheet = workbook.ActiveSheet; 
+  
+                worksheet.Name = "ExportedFromDatGrid"; 
+  
+                int cellRowIndex = 1; 
+                int cellColumnIndex = 1; 
+  
+                //Loop through each row and read value from each column. 
+                for (int i = 0; i < dgvCityDetails.Rows.Count - 1; i++) 
+                { 
+                    for (int j = 0; j < dgvCityDetails.Columns.Count; j++) 
+                    { 
+                        // Excel index starts from 1,1. As first Row would have the Column headers, adding a condition check. 
+                        if (cellRowIndex == 1) 
+                        { 
+                            worksheet.Cells[cellRowIndex, cellColumnIndex] = dgvCityDetails.Columns[j].HeaderText; 
+                        } 
+                        else 
+                        { 
+                            worksheet.Cells[cellRowIndex, cellColumnIndex] = dgvCityDetails.Rows[i].Cells[j].Value.ToString(); 
+                        } 
+                        cellColumnIndex++; 
+                    } 
+                    cellColumnIndex = 1; 
+                    cellRowIndex++; 
+                } 
+  
+                //Getting the location and file name of the excel to save from user. 
+                SaveFileDialog saveDialog = new SaveFileDialog(); 
+                saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"; 
+                saveDialog.FilterIndex = 2; 
+  
+                if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
+                { 
+                    workbook.SaveAs(saveDialog.FileName); 
+                    MessageBox.Show("Export Successful"); 
+                }                
+            } 
+            catch (System.Exception ex) 
+            { 
+                MessageBox.Show(ex.Message); 
+            } 
+            finally 
+            { 
+                excel.Quit(); 
+                workbook = null; 
+                excel = null; 
+            } 
+  
+        } 
+ 
+
+
+
+
+ 
+
+
+ 
+
+The below code handles the Windows loaded event where we populate the datagrid.
+
+ 
+
+C#
+private void Form1_Load(object sender, EventArgs e) 
+        { 
+            PopulateRows(); 
+        }
+ 
+ 
+
+We handle the button click event and call ExportToExcel to export the data.
+
+C#
+private void btnExport_Click(object sender, EventArgs e) 
+       { 
+           ExportToExcel(); 
+       }

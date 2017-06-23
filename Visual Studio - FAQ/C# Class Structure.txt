@@ -1,0 +1,52 @@
+//Using statements
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using ServiceDeskWinSvr.Utility;
+using System.Windows.Forms;
+using System.Diagnostics;
+
+//Namespace Declaration
+namespace ServiceDeskWinSvr.Classes
+{
+    //Class Declaration
+	class BatchFileExecuteHandler
+    {
+        //Class Constructor
+		public BatchFileExecuteHandler()
+        { 
+            //Constrcutor
+        }
+
+        //Class Method
+		public bool executeCacheReleaseBatch(string reqid)
+        {
+            try
+            {
+                Console.WriteLine("Start to Execute Cache Release Batch for ID : "+reqid);
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.CreateNoWindow = true;
+                psi.FileName = System.Configuration.ConfigurationManager.AppSettings["cache_release_batch_name"].ToString();
+                psi.WorkingDirectory = System.Configuration.ConfigurationManager.AppSettings["cache_release_batch_path"].ToString();
+                psi.Arguments = reqid;
+                psi.WindowStyle = ProcessWindowStyle.Hidden;
+                process.StartInfo = psi;
+                bool status = process.Start();
+                
+                process.WaitForExit(int.Parse(System.Configuration.ConfigurationManager.AppSettings["batch_execute_wait_time"].ToString()));
+
+                return status;
+
+            }
+            catch (Exception ex)
+            {
+                LogHandler.addLog(ServiceDeskConstants.log_level_error, "executeCacheReleaseBatch - " + ex.Message);
+                Console.WriteLine(ex.Message);
+                //MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+    }
+}

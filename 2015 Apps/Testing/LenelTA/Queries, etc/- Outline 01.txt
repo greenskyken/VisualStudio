@@ -1,0 +1,82 @@
+Define Parameters
+
+	Define site
+		combo selection - variable "DBsite"
+			Snap Lake
+			Victor Mine
+			Gahcho Kue Mine
+
+	Define Area
+		combo selection - variable "DBArea"
+			Recovery Plant
+				Recovery Tower
+					Recovery Floor XX
+				Vault/Sorthouse
+			Export Area
+				Export Room
+			Process Plant
+				DMS
+			
+	Define cardholders - variable array "DBcardholders"
+		All transactions
+			All
+		Specific cardholders
+			Selected from all and add to selection
+				combobox selector
+		Specific groups
+			Selected from access levels
+				combobox selector
+				
+	Define time constraints - variable "DBstart" and "DBend"
+		Last hour
+			calc current date/time. convert to datetime and subtract 1hr
+		Last day
+			calc current date/time. convert to datetime and subtract 1 day (to account for DST)
+		Last week
+			calc current date/time. convert to datetime and subtract 7 days (to account for DST)
+		Last month
+			calc current date/time. convert to datetime and subtract 1 month (to account for DST)
+		Specific time/date/time
+			capture entered date/time and convert to datetime
+			
+Application:
+	Main Body
+
+Variables:
+	String	DBSite - site location
+	String	DBArea - Area within minesite			
+	Stringlist DBCardholders - All cardholders to be queried
+	String(s) DBStartTime, DBEndTime - Search date/time constraints
+	
+Step One:
+	Mainform - all dropdowns disabled, except for location
+		User selects location from dropdown
+			Areas loaded for location
+			Area dropdown enabled
+		User selects area from dropdown
+			Personnel dropdown enabled
+		User selects personnel
+			"All" selected
+			Specific cardholder selected
+				Sort by last name
+			Date parameters enabled
+			
+Step Two:
+	Sort list
+		Door A IN
+		Door A OUT
+		etc
+
+Step Three:
+	Ensure that first transaction is an IN transaction
+		sort by date time from query
+		If first transaction exists, in IN reader list, keep, if not dump
+		If last transaction exists, in OUT readers list, keep, if not dump
+	
+Step Four:
+	Groom the list
+		Verify that all transactions are sequential
+			No IN, IN.....In, OUT same door....in out next door
+
+			
+Create CSVindexer.....

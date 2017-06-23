@@ -1,0 +1,11 @@
+Snap Lake NICE
+Data Source=10.25.240.45;Initial Catalog=EVENTS;Persist Security Info=True;User ID=vision;Password=vision
+
+Victor NICE
+Data Source=10.25.154.105;Initial Catalog=EVENTS;Persist Security Info=True;User ID=vision;Password=vision
+
+Gahcho NICE
+Data Source=10.60.225.100;Initial Catalog=EVENTS;Persist Security Info=True;User ID=vision;Password=vision
+
+Toronto Lenel
+Data Source=10.129.16.61;Initial Catalog=DBCAMASTERAC;User ID=lenel;Password=MULTIMEDIA

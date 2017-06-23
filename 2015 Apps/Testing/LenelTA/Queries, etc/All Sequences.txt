@@ -1,0 +1,39 @@
+Step 0
+	Monthly report population in Lenel TA access tables
+	
+	Table set for each of the past 12 months
+
+Area popiulation - based on monthly reporting
+	Select * from DBCAMaster
+	where
+	<name> in <door list>
+	
+Area list populated with all areas
+	Allows tracking of unused areas/errors in data population
+	
+Mainform
+	Report parameters
+		All secure areas at a location for all users for the last period
+		All secure areas at a location for all users for a specific period
+		All security areas at a location for a specific user for the last period
+		All security areas at a location for a specific user for a specific period
+		
+		Specific security area at a location for all users for the last period
+		Specific security area at a location for all users for a specific period
+		Specific security area at a location for specific users for the last period		
+		Specific security area at a location for specific users for a specific period		
+	
+Sorting Algorhythym
+	Pull all associated records
+		Select * from XXX
+		<joins>
+		where
+		eventdate > XXX
+		and evendate < YYY
+		and badge = ZZZ
+		
+
+	
+				
+		
+		

@@ -1,0 +1,47 @@
+use DBCAMASTERAC
+
+declare @Date_Event datetime = convert(datetime, '2016-04-01 00:00')
+
+select
+	cast(EVENTS.EVENT_TIME_UTC as DATE) as Access_Date_UTC,
+	convert(varchar(10),EVENTS.EVENT_TIME_UTC,108) as Access_Time_UTC,
+	READER.READERDESC as Device_ID,
+	EVENTYPE.EVTDESCR as Event_Type,
+	EMP.FIRSTNAME as First_Name,
+	EMP.LASTNAME as Last_Name,
+	EVENTS.CARDNUM as Badge
+from
+	EVENTS
+		join EVENTYPE on EVENTS.EVENTTYPE = EVENTYPE.EVTYPEID
+		join BADGE on EVENTS.CARDNUM = BADGE.ID
+		join EMP on BADGE.EMPID = EMP.ID
+		join READER on EVENTS.DEVID = READER.READERID
+		and EVENTS.MACHINE = READER.PANELID 
+where
+	EVENT_TIME_UTC >= @Date_Event
+	AND EVENTTYPE=0
+	AND READER.READERDESC IN
+	('VIC-PCC-ENTRY-Red Entry Door Reader',
+	'VIC-RED-RECOV-1F Recovery Tower Booth Entrance BIO',	
+	'VIC-RED-RECOV-2F Entry BIO',
+	'VIC-RED-RECOV-2F Exit Reader',
+	'VIC-RED-RECOV-3F Entry BIO',
+	'VIC-RED-RECOV-3F Exit Reader',
+	'VIC-RED-RECOV-4F Entry BIO',
+	'VIC-RED-RECOV-4F Exit Reader',
+	'VIC-RED-RECOV-5F Entry BIO',
+	'VIC-RED-RECOV-5F Exit Reader',
+	'VIC-RED-RECOV-6F Entry BIO',
+	'VIC-RED-RECOV-6F Exit Reader',
+	'VIC-RED-RECOV-6F Screen to Tower Reader BIO',
+	'VIC-RED-RECOV-6F Tower to Screen Reader',
+	'VIC-RED-RECOV-1F Recovery Tower Booth Exit Reader',
+	'VIC-RED-Vault Gate Entrance Reader',
+	'VIC-RED-Vault Gate Exit Reader',
+	'VIC-RED-Cleaning Room Entry Reader',
+	'VIC-RED-Cleaning Room Exit Reader',
+	'VIC-RED-EXPORT-Export Bay to Rear Safe Reader',
+	'VIC-RED-EXPORT-Rear Safe to Export Bay Reader',
+	'VIC-PCC-Valuation Room Booth Entry Reader',
+	'VIC-PCC-Valuation Room Booth Exit Reader',
+	'VIC-PCC-EXIT-Red Exit Reader')

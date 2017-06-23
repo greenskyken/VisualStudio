@@ -1,0 +1,5 @@
+use LenelTA
+
+SELECT *
+INTO [301_All_Critical_Records_SnapLake]
+FROM [300_All_Critical_Records_Victor]

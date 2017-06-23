@@ -1,0 +1,22 @@
+Conenction to a Database
+
+- using System.Data.SqlClient
+
+- Create SQL COnenction
+	SqlConnection sqlcon = new SqlConnection
+- Create connection string
+	string constring = Data Source=10.25.154.105;Initial Catalog=EVENTS;Persist Security Info=True;User ID=vision;Password=vision
+- Create query
+	string squery = "Select * from...."
+- Create SqlAdapter
+	SqlDataAdapter sqladapt = new SqlDatAdapter(takes parameters query and  connectionstring)
+	sqladapt.SelectCommand.CommandTimeout = 0 //set timout to never
+- Create SqlCommandBuilder
+	SqlCommandBuilder x = new SqlCommandBuilder(sqladapt)
+
+- Create and load Dataset
+	DataSet Dset = new DataSet()
+	sqladap.Fill(Dset)
+
+- Assign Dataset to DataGridView
+	DGV.DataSource = Dset.Tables[0]

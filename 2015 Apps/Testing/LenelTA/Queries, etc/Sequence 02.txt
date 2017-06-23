@@ -1,0 +1,27 @@
+Form Buttons
+- Load Records
+- Close
+- Start Over
+	- Start over clears all fields
+	- All boxes disabled
+
+Load all reader names into Area table
+	- IndexID
+	- Location (Snap, Victor, Gahcho)
+	- Area
+	- DoorName
+	- ReaderIn
+	- ReaderInTable
+	- ReaderOut
+	- ReaderOutTable
+	
+Application Load
+Main Form
+- Button for "Cardholder Activity"
+- Button for "By Area"
+
+
+
+
+		
+
